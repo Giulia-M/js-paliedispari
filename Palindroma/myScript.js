@@ -29,39 +29,40 @@ function checkPalindrome(str){
 
 //acquisizione input 
 var inputUtente = prompt("Inserisci una parola palindroma");
+
 //l'utente può rispondere con una parola ma anche con un numero o può lasciare stringa vuota 
+
+
+if (controlloInputPalindroma(inputUtente)) {
+    console.log("la parola è palindroma") 
+
+} else {
+    console.log("la parola non è palindroma") 
+}
+
+
+
 
 
 //capire se la parola inserita è palindroma o no 
 function controlloInputPalindroma(str) {
 
-    //controllo se l'utente non mi scrive nessuna parola e la trasformo in in stringa
-    if (!str) {
-        str = ""
-    }
-    //controllo se la parola scritta dall'utente è di tipo stringa? se non è di tipo stringa allora la converto con .toString()
-    if (typeof str !== "string") {
-        str = str.toString()
-    }
-    //lunghezza della parola?
-    var testo = inputUtente.length
+    
+    //in memoria una nuova stringa
+    var stringaInvertita = "";
 
-    //ciclo per controllare la parola 
-    for (var i = 0; i < testo; i++) {
+    //ciclo per controllare la parola da destra verso sinistra
+    for (var i = str.length - 1; i >= 0; i--) {
 
-        //controllo se la prima e l'ultima lettera sono uguali
-        if (inputUtente[i] !== inputUtente[testo - 1 - i]) {
-            console.log(inputUtente[i])
-            console.log(inputUtente[testo - 1 - i])
-            return "la parola inserita non è palindroma"
-        }
-
+        //mi estrae i caratteri 
+        stringaInvertita += str[i]
     }
-    return "è una parola palindroma"
+
+    //controlla che la parola invertita è uguale alla parola originale cioè la parola che viene dal prompt "inputUtente" 
+    //il return mi da vero o falso 
+    return str === stringaInvertita
+
 }
 
-//invoca la funzione
-var risultatoCheck = controlloInputPalindroma(inputUtente);
 
-console.log(risultatoCheck);
 

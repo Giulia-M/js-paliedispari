@@ -7,13 +7,13 @@ var wordInput = prompt("Scrivi pari o dispari");
 
 //.toLowerCase trasforma in minuscolo la parola
 wordInput = wordInput.toLowerCase()
-
+console.log(wordInput + " la parola scritta dall'utente")
 //validazione dati: wordInput
 if(wordInput === "pari" || wordInput === "dispari" ) {
 
     // step 2. l'utente scrive un numero tra 1 e 5. ParseInt() trasforma in numero 
     var numberInput = parseInt(prompt("scrivi un numero tra 1 e 5"));
-
+    console.log(numberInput + " il numero scelto dall'utente")
     //validazione numeri 
     if(Number.isNaN(numberInput)) {
         alert("non hai inserito un numero")
@@ -21,7 +21,12 @@ if(wordInput === "pari" || wordInput === "dispari" ) {
         alert("hai inserito un numero minore di 1 o maggiore di 5")
     } else {
         //invoco la funzione per eseguire il codice e dichiarare chi ha vinto 
-        pariDispari(numberInput, wordInput)
+        
+        if (pariDispari(numberInput, wordInput)) {
+            console.log("L'utente ha inserito " + wordInput + "Hai vinto.")
+        } else {
+            console.log("L'utente ha inserito " + wordInput + " Hai perso.")
+        }
     }
 } else {
     alert("non hai scritto correttamente pari o dispari")
@@ -35,6 +40,7 @@ function random() {
     //Math.random() restituisce un valore decimale da 0 a 1 nn compreso
     //Math.floor restituisce un numero tra 0 e 4 (con il +1 --> da 1 a 5)
     var nR = Math.floor(Math.random() * 5) + 1
+    console.log(nR + " il numero random generato dal computer")
     return nR
 }
 
@@ -46,31 +52,25 @@ function random() {
 //2. per capire chi ha vinto(se la somma dei due numeri è pari e l'utente ha scritto pari ha vinto l'utente)
 function pariDispari(num, word) {
     var somma = random() + num
-    console.log(somma)
+    console.log(somma + " è la somma dei due numeri")
 
+    var esito;
 
     //controlli 
     //se la somma è pari e la parola dell'utente è pari 
-    if (somma % 2 === 0 && word === "pari" ) {
-        console.log("Hai vinto")
+    if (somma % 2 === 0) {
+        esito = "pari"
 
-        return
-
-    } else if(somma % 2 === 0 && word === "dispari") {
-        //se la somma dei due numeri è pari e l'utente ha scritto dispari 
-        console.log("Hai perso")
-        return
-    } else if (somma % 2 !== 0 && word === "pari") {
-        //se la somma è dispari e l'utente ha scritto pari 
-        console.log("Hai perso")
-        return
     } else {
-        //se la somma dei due numeri è dispari e l'utente ha scritto dispari 
-        console.log("hai vinto")
-        return
+        esito = "dispari";
     }
 
+    if (word === esito) {
+        return true;
 
+    } else {
+        return false;
+    }
 
 
 }
